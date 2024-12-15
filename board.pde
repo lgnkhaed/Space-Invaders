@@ -34,8 +34,8 @@ class Board
        
        
       // juste pour tester l'affichage du board 
-       _cells[10][5] = TypeCell.SPACESHIP;
-       _cells[15][10] = TypeCell.INVADER;
+      //  _cells[10][5] = TypeCell.SPACESHIP;
+      // _cells[15][10] = TypeCell.INVADER;
   }
   
   PVector getCellCenter(int i, int j) {
@@ -58,7 +58,7 @@ class Board
              case SPACESHIP:
                   imageMode(CENTER);
                   centre = getCellCenter(i, j);
-                  image(spaceship_,centre.x,centre.y,20,20);
+                  image(spaceship_,centre.x,centre.y,taille_case,taille_case);
                   break;
              case OBSTACLE:
                   centre = getCellCenter(i, j);
@@ -66,8 +66,11 @@ class Board
                   break;
              case EMPTY:
                   centre = getCellCenter(i, j);
-                  fill(255, 0, 0);
-                  circle(centre.x, centre.y, 0.5 * _cellSize);
+                  fill(0);
+                  stroke(255); 
+                  strokeWeight(2); 
+                  rectMode(CENTER); 
+                  rect(centre.x, centre.y,this._cellSize, this._cellSize);
                   break;
              default:
                   noFill();

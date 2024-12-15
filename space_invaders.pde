@@ -1,4 +1,5 @@
 Game game;
+boolean spaceship_is_moving = false;
 
 
 void setup() {
@@ -23,8 +24,18 @@ void draw() {
 }
 
 void keyPressed() {
-  game.handleKey(key);
+ spaceship_is_moving = true; 
+ print(char(key));
+ game.handleKey(key);
+      
+
 }
 
 void mousePressed(){
+}
+
+void keyReleased() {
+  if (  key =='D' || key == 'd' || key == 'Q' || key == 'q' || keyCode == LEFT || keyCode == RIGHT){
+     spaceship_is_moving = false;   
+  }
 }
