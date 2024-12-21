@@ -1,5 +1,8 @@
 Game game;
 boolean spaceship_is_moving = false;
+boolean game_is_running = false; // set true au début de jeu ;;; jl'uilise dans la classe Invaders 
+int lastMoveTimeInvaders = 0;
+int moveIntervalInvaders = 1000;
 
 
 void setup() {
@@ -21,14 +24,22 @@ void draw() {
   background(0);
   game.update();
   game.drawIt();
+ 
+  // invaders bougent chaque 1 second 
+   if (millis() - lastMoveTimeInvaders >= moveIntervalInvaders && game_is_running) {
+        game._invader_tab.moveInvaders(game._board);
+        lastMoveTimeInvaders = millis();  
+    }
 }
 
 void keyPressed() {
  spaceship_is_moving = true; 
- print(char(key));
+ game_is_running = true; 
+ //print(game_is_running);
+ // print(char(key));
  game.handleKey(key);
-      
 
+    
 }
 
 void mousePressed(){

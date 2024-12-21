@@ -3,7 +3,9 @@ enum TypeCell
 {
   EMPTY,
   SPACESHIP,
-  INVADER,
+  INVADER_RED,
+  INVADER_GREEN,
+  INVADER_CYAN,
   OBSTACLE
 }
 // une varible pour m'aider à calculer les centres des cases pour faire le draw 
@@ -50,11 +52,21 @@ class Board
         for ( int j = 0 ; j < _nbCellsX ; j++){
           
           switch (_cells[i][j]) {
-             case INVADER:
+             case INVADER_RED:
                   imageMode(CENTER);
                   centre = getCellCenter(i, j);   
-                  image(red_invader_2,centre.x,centre.y,20,20); 
+                  image(red_invader_1,centre.x,centre.y,20,20); 
                   break;
+             case INVADER_GREEN:
+                  imageMode(CENTER);
+                  centre = getCellCenter(i, j);   
+                  image(green_invader_1,centre.x,centre.y,20,20); 
+                  break;
+             case INVADER_CYAN:
+                  imageMode(CENTER);
+                  centre = getCellCenter(i, j);   
+                  image(cyan_invader_1,centre.x,centre.y,20,20); 
+                  break;          
              case SPACESHIP:
                   imageMode(CENTER);
                   centre = getCellCenter(i, j);
@@ -67,8 +79,8 @@ class Board
              case EMPTY:
                   centre = getCellCenter(i, j);
                   fill(0);
-                  stroke(255); 
-                  strokeWeight(2); 
+                  //stroke(255); 
+                  // strokeWeight(2); 
                   rectMode(CENTER); 
                   rect(centre.x, centre.y,this._cellSize, this._cellSize);
                   break;

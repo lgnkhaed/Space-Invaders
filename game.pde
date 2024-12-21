@@ -8,6 +8,7 @@ class Game
 {
   Board _board;
   Spaceship _spaceship;
+  Invaders _invader_tab;
   String _levelName;
   int _lifes;
   int _score;
@@ -15,6 +16,7 @@ class Game
   Game() {
     this._board = new Board(pos,20,20,taille_case);
     this._spaceship = new Spaceship(); 
+    this._invader_tab = new Invaders(this._board);
   }
   
   void update() {
