@@ -4,9 +4,10 @@ boolean game_is_running = false; // set true au début de jeu ;;; jl'uilise dans
 int lastMoveTimeInvaders = 0;
 int moveIntervalInvaders = 1000;
 
-
+ 
+ 
 void setup() {
-  size(800, 800, P2D);
+  size(600, 600, P2D);
   
   // on charge les images 
   cyan_invader_1 = loadImage("data/cyan_invader_1.png");
@@ -17,18 +18,27 @@ void setup() {
   green_invader_2= loadImage("data/green_invader_2.png");
   spaceship_ = loadImage("data/spaceship.png");
   
+  font = createFont("Georgia",32); 
+  textFont(font,32);
+  textAlign(CENTER,CENTER);
+  
   game = new Game();
+  
 }
 
 void draw() {
   background(0);
   game.update();
   game.drawIt();
- 
-  // invaders bougent chaque 1 second 
+  game.printLevel();
+  // pour écrire le score // le update on verra 
+  game.printScore();
+  game.printLifes();  
+   
    if (millis() - lastMoveTimeInvaders >= moveIntervalInvaders && game_is_running) {
         game._invader_tab.moveInvaders(game._board);
         lastMoveTimeInvaders = millis();  
+        // invaders bougent chaque 1 second      
     }
 }
 
@@ -42,8 +52,11 @@ void keyPressed() {
     
 }
 
+
 void mousePressed(){
+  game.handleMouse(mouseButton);
 }
+ 
 
 void keyReleased() {
   if (  key =='D' || key == 'd' || key == 'Q' || key == 'q' || keyCode == LEFT || keyCode == RIGHT){

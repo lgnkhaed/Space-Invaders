@@ -48,7 +48,7 @@ class Board
   
   void drawIt(){
    
-     for ( int i = 0 ; i < _nbCellsY ; i++){
+     for ( int i = 2 ; i < _nbCellsY ; i++){ // starting from 2 because the first two lines to be able to display the score and lifes 
         for ( int j = 0 ; j < _nbCellsX ; j++){
           
           switch (_cells[i][j]) {
@@ -80,7 +80,7 @@ class Board
                   centre = getCellCenter(i, j);
                   fill(0);
                   //stroke(255); 
-                  // strokeWeight(2); 
+                  //strokeWeight(2); 
                   rectMode(CENTER); 
                   rect(centre.x, centre.y,this._cellSize, this._cellSize);
                   break;

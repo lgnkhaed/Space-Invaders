@@ -10,8 +10,8 @@ class Invaders{
  
     // consturcteur au début met les invaders au millieu *** il prend un Board comme parametres 
     Invaders(Board board){
-       this.x_first_cell = 2;   /* a règler ces valeurs et les mettres dans constatntes à la fin   */
-       this.y_first_cell = 3;
+       this.x_first_cell = x_pos_invaders_dep ;
+       this.y_first_cell = y_pos_invaders_dep;
        this._invaders = new TypeCell[3][14];
        this.intialisation_table();
        this.placer_invaders(board); 

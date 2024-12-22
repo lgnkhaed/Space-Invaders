@@ -11,22 +11,19 @@ class Spaceship {
   // je passe aucun argument pour le constructeur il démarre de (10,10) sur le board 
   Spaceship(){
     this._cellX = 10;
-    this._cellY = 18;
+    this._cellY = 19;
     this._position = new PVector();
-    this._position.x = 415 /* 100 + x * taille_case*/ ;
-    this._position.y = pos_vertical_spaceship ; 
+    this._position.x = 315 /* 10 * taille case + 15 */ ;
+    this._position.y = 585 ; 
     this._size = taille_case;
     //  print(this._cellX +" ***********" + this._cellY + "**********" + this._position.x + ":"+this._position.y);
   }
    
-   
-   /* pour déplacer  spachship sur le board  */
-  void move(Board board, PVector dir){
-   
-  }
+
+ void move(Board board, PVector dir){}
   
 
-void update(Board board) {
+ void update(Board board) {
     // calcul des nums des cases en dépendant sur la position après le movement 
     int newCellX = floor((this._position.x - board._position.x) / board._cellSize);
     int newCellY = floor((this._position.y - board._position.y) / board._cellSize);
@@ -50,14 +47,14 @@ void update(Board board) {
 
   
   void drawIt() {
-    imageMode(CENTER);
-    image(spaceship_,this._position.x,this._position.y,taille_case,taille_case);
+    // imageMode(CENTER);
+    //image(spaceship_,this._position.x,this._position.y,taille_case,taille_case);
   }
 
 //  déplacement du spaceship right 
   void move_spaceship_right(){
 
-     if(this._position.x < 670){
+     if(this._position.x < 600 ){
        this._position.x  += speed;
     } 
    
@@ -65,8 +62,11 @@ void update(Board board) {
 
 // deplacement du spaceship left
    void move_spaceship_left(){ 
-      if(this._position.x > 130.0){
+      if(this._position.x > 30.0){
        this._position.x  -= speed;
      } 
   }
+
+  
+
 }

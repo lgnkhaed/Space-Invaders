@@ -25,3 +25,12 @@ PVector start_position = new PVector(taille_case-1, taille_case/2);
 final int speed = 30 ; 
 
 final float pos_vertical_spaceship = 655;/* la position vertical final de  */
+
+// constants to use in the startof the game 
+final int  x_pos_invaders_dep = 2 ; 
+final int y_pos_invaders_dep = 3; 
+
+
+
+// font pour le projet 
+PFont font;
