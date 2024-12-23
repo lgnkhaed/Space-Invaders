@@ -54,7 +54,7 @@ class Spaceship {
 //  déplacement du spaceship right 
   void move_spaceship_right(){
 
-     if(this._position.x < 600 ){
+     if(this._position.x < 570 ){
        this._position.x  += speed;
     } 
    

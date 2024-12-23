@@ -3,15 +3,15 @@ boolean offset_right = true;
 
 class Invaders{
     // les valeurs int sont pour les première case de mon tableau sur le board 
-     int x_first_cell;
+     int x_first_cell; 
      int y_first_cell; 
     TypeCell _invaders[][];
 
  
     // consturcteur au début met les invaders au millieu *** il prend un Board comme parametres 
     Invaders(Board board){
-       this.x_first_cell = x_pos_invaders_dep ;
-       this.y_first_cell = y_pos_invaders_dep;
+       this.x_first_cell = x_pos_invaders_dep ; //ligne 
+       this.y_first_cell = y_pos_invaders_dep;  // colonnes 
        this._invaders = new TypeCell[3][14];
        this.intialisation_table();
        this.placer_invaders(board); 
@@ -59,7 +59,7 @@ class Invaders{
       }
 
     // on, arrette si on est en bas 
-      if (this.x_first_cell + this._invaders.length >= 18) {
+      if (this.y_first_cell + this._invaders.length >= 19) {
         game_is_running = false;
       }
 }
