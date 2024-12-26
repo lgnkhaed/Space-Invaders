@@ -14,6 +14,9 @@ PImage spaceship_ ;
 // la taille de la case dans bard et elle représente aussi le size display pour spaceship et invader 
 final int taille_case = 30; 
 
+
+// nombres de cases est 400 
+int nbr_case = 20;
 // taille du spaceshp 
 // final float size_spaceship = 20;
 
@@ -33,4 +36,5 @@ final int y_pos_invaders_dep = 3;
 
 
 // font pour le projet 
-PFont font;
+PFont font_for_score;
+PFont font_for_menu;

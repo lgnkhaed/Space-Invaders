@@ -36,10 +36,23 @@ class Board
        
        
       // juste pour tester l'affichage du board 
-      //  _cells[10][5] = TypeCell.SPACESHIP;
+       // _cells[10][10] = TypeCell.OBSTACLE;
       // _cells[15][10] = TypeCell.INVADER;
   }
-  
+
+  // constructeur pour aider à remplir le board à partir d'un fihcier text 
+  Board(){
+     this._position = new PVector(0,0);
+     this._nbCellsX = nbr_case;
+     this._nbCellsY = nbr_case;
+     _cellSize = taille_case;
+     _cells = new TypeCell[_nbCellsY][_nbCellsX];
+  }
+
+
+
+
+
   PVector getCellCenter(int i, int j) {
     return new PVector( _position.x + j * _cellSize + (_cellSize * 0.5),
                         _position.y + i * _cellSize + (_cellSize * 0.5) );
@@ -74,13 +87,15 @@ class Board
                   break;
              case OBSTACLE:
                   centre = getCellCenter(i, j);
-                  print("hello i am an obstacle");
+                  fill(64,64,64);
+                  rectMode(CENTER);
+                  rect(centre.x,centre.y,this._cellSize,this._cellSize);
                   break;
              case EMPTY:
                   centre = getCellCenter(i, j);
                   fill(0);
                   //stroke(255); 
-                  //strokeWeight(2); 
+                  // strokeWeight(2); 
                   rectMode(CENTER); 
                   rect(centre.x, centre.y,this._cellSize, this._cellSize);
                   break;
@@ -91,4 +106,38 @@ class Board
        }
      }
   }
+
+// void to save the board 
+void saveBoard() {
+    ArrayList<String> to_save_board = new ArrayList<>();
+    to_save_board.add("Game number : " + number_of_games_saved);
+    number_of_games_saved++; 
+
+    for (int i = 2; i < this._nbCellsY; i++) {
+        String line = "";
+        for (int j = 0; j < this._nbCellsX; j++) {
+            switch (this._cells[i][j]) {
+                case EMPTY:
+                    line += "E";
+                    break;
+                case INVADER_GREEN:
+                case INVADER_CYAN:
+                case INVADER_RED:
+                    line += "I";
+                    break;
+                case OBSTACLE:
+                    line += "X";
+                    break;
+                case SPACESHIP:
+                    line += "S";
+                    break;
+            }
+        }
+        to_save_board.add(line);
+    }
+    
+    saveStrings("saved_games/game" + number_of_games_saved, to_save_board.toArray(new String[0]));
+}
+
+
 }

@@ -16,7 +16,16 @@ class Invaders{
        this.intialisation_table();
        this.placer_invaders(board); 
     }
-
+  
+    // constroctor taht helps in starting the game with atext file 
+    Invaders(Board board , int _x_first_case , int _y_first_case ){
+       this.x_first_cell = _x_first_case ; //ligne 
+       this.y_first_cell = _y_first_case;  // colonnes 
+       this._invaders = new TypeCell[3][14];
+       this.intialisation_table();
+       this.placer_invaders(board); 
+    }    
+ 
     // méthode pour instialliser le tableau 
     void intialisation_table(){
         for (int i = 0; i < this._invaders[0].length; i++) {

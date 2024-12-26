@@ -47,8 +47,8 @@ class Spaceship {
 
   
   void drawIt() {
-    // imageMode(CENTER);
-    //image(spaceship_,this._position.x,this._position.y,taille_case,taille_case);
+    imageMode(CENTER);
+    image(spaceship_,this._position.x,this._position.y,taille_case,taille_case);
   }
 
 //  déplacement du spaceship right 
