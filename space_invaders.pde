@@ -1,13 +1,23 @@
 Game game;
 boolean game_is_running = false; // set true au début de jeu ;;; jl'uilise dans la classe Invaders 
 boolean tab_pressed = false; 
-
 int lastMoveTimeInvaders = 0;
 int moveIntervalInvaders = 1000; // moves chaque 1s 
 int shotIntervalInvaders = 5000;  // tirent chaque 5s 
 Menu menu;
+ArrayList<Bullet> bullets_spaceship = new ArrayList<Bullet>(); // liste pour gérer les tirs du spaceship  
+ArrayList<Bullet> bullets_invaders = new ArrayList<Bullet>();  //liste pour gérer les tirs des Invaders 
+int number_of_games_saved = 0 ; // variable used inthe menu when we save the game 
+int number_game_to_charge ; // variable used in the menu to charge a game 
+String chemin_game_to_charge; 
+import javax.swing.JOptionPane;
+boolean printScores = false; 
 
- 
+// boolean pour finrir le jeu 
+boolean game_is_over = false;
+boolean you_win =false; 
+
+
 void setup() {
   size(600, 600, P2D);
   
@@ -23,7 +33,10 @@ void setup() {
 
   // je charge le level 1 
   String[] level1 = loadStrings("levels/level1.txt");
-  
+   
+  // je charge le .txt file which contains the best scores 
+  best_scores = loadStrings("bestScore.txt"); 
+
   // creating fonts
   font_for_score  = createFont("Georgia",32); 
   textFont(font_for_score,32);
@@ -31,6 +44,9 @@ void setup() {
   
   font_for_menu = createFont("Georgia",20);
 
+ 
+
+  // creating instances 
   game = new Game(level1);
   menu= new Menu(game);
 
@@ -71,9 +87,34 @@ void draw() {
       // gérer le curser 
     }
 
+    // pour afficher les meilleurs 
+    if(printScores){
+      this.menu.printBestScores();
+    }
+   
+    // pour voir s'il le joueur a perdu 
+    if(game_is_over){
+      game_is_running = false;
+      textFont(font_for_score);
+      stroke(255);
+      fill(255,0,0);
+      rect(150,150,300,300);
+      fill(0);
+      text("YOU LOST " , 300, 300);
+      noStroke();
+    }
 
-
-
+    // pour voir si le jour a gagné 
+    if(you_win){
+      game_is_running = false; 
+      stroke(255);
+      textFont(font_for_score);
+      fill(255,0,0);
+      rect(300,300,300,300);
+      fill(0);
+      text("YOU WON " , 300, 300);
+      noStroke();
+    }
 
     
 
@@ -89,6 +130,18 @@ void mousePressed(){
 }
  
 
-void keyReleased() {
-  
+
+int askInteger () {
+  int i = 0;
+  noLoop();
+  String r = JOptionPane.showInputDialog(null, "Entrez un entier", "askInteger", JOptionPane.QUESTION_MESSAGE);
+  loop();
+  try {
+    i = Integer.parseInt(r);
+  } 
+  catch(NumberFormatException e) {
+    println("Note: Ce n'est pas un entier!");
+  }
+
+  return i;
 }

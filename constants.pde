@@ -17,8 +17,6 @@ final int taille_case = 30;
 
 // nombres de cases est 400 
 int nbr_case = 20;
-// taille du spaceshp 
-// final float size_spaceship = 20;
 
 // position départ Spaceship ,, modifiable durant la partie une fois terminé , elle se réintillise  
 PVector start_position = new PVector(taille_case-1, taille_case/2);
@@ -38,3 +36,6 @@ final int y_pos_invaders_dep = 3;
 // font pour le projet 
 PFont font_for_score;
 PFont font_for_menu;
+
+// tableau Strings pour chager text file des  meilleurs scores
+String[] best_scores; 

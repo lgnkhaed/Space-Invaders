@@ -1,9 +1,7 @@
 // varible pour créer un game pour tester le code  
 PVector pos = new PVector(0,0);
 PVector pos_deplacement; 
-ArrayList<Bullet> bullets_spaceship = new ArrayList<Bullet>(); // liste pour gérer les tirs du spaceship  
-ArrayList<Bullet> bullets_invaders = new ArrayList<Bullet>();  //liste pour gérer les tirs des Invaders 
-int number_of_games_saved = 0 ; 
+
 class Game 
 {
   Board _board;
@@ -88,12 +86,9 @@ class Game
                 int x_tab = b.case_x - this._invader_tab.x_first_cell;
                 int y_tab = b.case_y - this._invader_tab.y_first_cell;
                 
-
-
                 //print("la case de la bullet e boar aussi d : " + b.case_x +"::" + b.case_y+"\n");
                 //print("la case sur tableua : " + x_tab + "::" + y_tab +"\n");
                 //print(this._invader_tab.x_first_cell+"::"+ this._invader_tab.y_first_cell+"\n");
-
                 
                 if (x_tab >= 0 && x_tab < this._invader_tab._invaders[0].length &&
                 y_tab >= 0 && y_tab < this._invader_tab._invaders.length){
@@ -138,6 +133,16 @@ class Game
         }
 
       }
+
+      // condition pour verifier si le tableau des invaders  est arrivé à la fin et il est pas vides ou le nombre de lifes est0  
+      if( (this._invader_tab.y_first_cell == 16 && this._invader_tab.tab_non_vide()) || (this._lifes <=0 && this._invader_tab.tab_non_vide())){
+        game_is_over = true; 
+      }
+
+      // ondition pour vérifier si le tableauest vide 
+      if(!this._invader_tab.tab_non_vide()){
+        you_win = true;
+      }
 }
 
 
@@ -166,6 +171,7 @@ class Game
           game_is_running = false;
       }else if(!tab_pressed){
          game_is_running = true;
+         printScores = false;
       }
     }else{
         game_is_running = true ; 
@@ -186,7 +192,8 @@ class Game
        PVector bulletPos = new PVector(this._spaceship._position.x,this._spaceship._position.y);
        bullets_spaceship.add(new Bullet(bulletPos));
     }
- 
+    
+
    
 
 
@@ -211,11 +218,17 @@ class Game
         if (mouseX > buttonX && mouseX < buttonX + 200 &&
         mouseY > buttonY && mouseY < buttonY + 50) {
             
-            println("Bouton " +i+ " cliqué !\n");
+            //println("Bouton " +i+ " cliqué !\n");
             handleButtonClickMenu(i);  
          }
        }
-     } 
+      
+      // condition pour fermer le menu 
+      if(printScores && ( mouseX <= 440 && mouseX >= 420) && (mouseY >= 165 && mouseY <= 185)){
+        printScores = false;
+      }  
+      
+     }
   }
    
    
@@ -265,7 +278,7 @@ class Game
 void handleButtonClickMenu(int num_button) {
   switch (num_button) {
     case 0:
-      //println("Recommencer la partie");
+    // reommencer la partie 
       this._board = new Board(pos,nbr_case,nbr_case,taille_case);
       this._spaceship = new Spaceship(); 
       this._invader_tab = new Invaders(this._board);
@@ -274,26 +287,102 @@ void handleButtonClickMenu(int num_button) {
       this._levelName = "Niveau 1"; 
       break;
     case 1:
-      //println("Sauvegarder la partie");
+    // save game 
       this._board.saveBoard();
       break;
     case 2:
+      //
+      //number_game_to_charge = askInteger();
+      //chemin_game_to_charge ="saved_games/game"+number_game_to_charge;
+      //uploadOldGame(chemin_game_to_charge);
       println("Charger une partie");
-      // Code pour charger une sauvegarde
-      break;
     case 3:
       println("Meilleurs scores");
-      // Code pour afficher les scores
+      printScores = true;
       break;
     case 4:
       println("Quitter");
-      exit();  // pour quitter 
+      exit(); 
       break;
   }
 }
 
+/*
+void uploadOldGame(String chemin_vers_fichier) {
+    String[] gameToUpload = loadStrings(chemin_vers_fichier);
+    
+   
+    boolean first_invader_case_found = false;
+    int x = -1; // Initialize to -1 to detect if not found
+    int y = -1;
+    String line;
 
+    // Fill the board from the file
+    for (int i = 0; i < gameToUpload.length - 1 ; i++) {  
+        line = gameToUpload[i];
+        
+        for (int j = 0; j < line.length(); j++) {
+            char c = line.charAt(j);        
+                switch (c) {
+                    case 'E':
+                        this._board._cells[i][j] = TypeCell.EMPTY;
+                        break;
+                    case 'X':
+                        this._board._cells[i][j] = TypeCell.OBSTACLE;
+                        break;
+                    case 'S':
+                        this._board._cells[i][j] = TypeCell.SPACESHIP;
+                        break;
+                    case 'I':
+                        if (!first_invader_case_found) {
+                            first_invader_case_found = true;
+                            x = i;
+                            y = j;
+                        }
+                        break;
+                    default:
+                        noFill();
+                        break;
+                }
+            
+        }
+    }
+    // si aucun invaer est trouvé 
+    if (!first_invader_case_found) {
+        return;
+    }
 
+    // remplir le tableau 
+      int random = 0 ;
+        for (int i = 0 ; i < this._invader_tab._invaders.length ; i++) {
+            if (x + i >= gameToUpload.length) {
+                break;  
+            }
+            line = gameToUpload[x + i];
 
+            for (int j = 0; j < this._invader_tab._invaders[i].length; j++) {
+                if (y + j >= line.length()) {
+                    break;  
+                }
+                if(line[y+j] == 'I'){
+                   if(random == 0){
+                      this._invader_tab._invaders[i][j] = TypeCell.INVADER_RED;
+                      random = 1 ;
+                   }else if (random == 1){
+                      this._invader_tab._invaders[i][j] = TypeCell.INVADER_GREEN;
+                      random = 2 ; 
+                   }else if(random == 2){
+                      this._invader_tab._invaders[i][j] = TypeCell.INVADER_CYAN;
+                      random = 0 ;
+                   }
+            }
+        }
+    
+    
+    if (this._invader_tab != null) {
+        this._invader_tab.placer_invaders(this._board);
+    }
+}
+*/
 
 } 

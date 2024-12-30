@@ -112,6 +112,21 @@ class Invaders{
     }
 }
 
+ 
+// methode retourne true si le tableau des inavders a une seule case qui contient un invader
+  boolean tab_non_vide(){
+
+    for(int i = 0 ; i < _invaders.length ; i++){
+        for( int j = 0 ; j < _invaders[i].length ; j++){
+            if(_invaders[i][j] == TypeCell.INVADER_CYAN ||
+             _invaders[i][j] == TypeCell.INVADER_RED || _invaders[i][j] == TypeCell.INVADER_GREEN){
+                return true;
+            }
+        }
+    }
+    // si c vide retourne false 
+    return false;
+  }
 
 
 }
