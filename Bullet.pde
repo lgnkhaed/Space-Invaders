@@ -26,7 +26,8 @@ class Bullet {
 
   void update_spaceship(){
     this.pos.y -= speed;
-    this.case_y = (int) this.pos.y / 30; 
+    this.case_y = floor(this.pos.y / 30);
+    this.case_y = constrain(this.case_y,0,19); 
   }
 
   void drawIt_spaceship() {
@@ -36,7 +37,8 @@ class Bullet {
 
    void update_invaders_bullet(){
     this.pos.y += speed;
-    this.case_y = (int) this.pos.y / 30 ;
+    this.case_y = floor(this.pos.y / 30 );
+    this.case_y = constrain(this.case_y,0,19);
    }
 
    void drawIt_invaders(){

@@ -1,14 +1,12 @@
+  
+
 class Menu {
   // position on the screen  
   PVector pos_corner;
   // the game whichis running while the maenu is called 
   Game game; 
   // values to draw the menu // to be changed into constants maybe 
-  int menu_size = 400;
-  int width_button = 200 ;
-  int height_button = 50; 
-  int space_between = 20;   
-
+ 
   Menu(Game game){
      this.game = game ; 
      this.pos_corner = new PVector(100,100);
@@ -20,7 +18,7 @@ class Menu {
     strokeWeight(2);
     fill(0);
     rectMode(CORNER);
-    rect(this.pos_corner.x, this.pos_corner.y, this.menu_size, this.menu_size);
+    rect(this.pos_corner.x, this.pos_corner.y, menu_size, menu_size);
 
     
    

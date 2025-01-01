@@ -1,23 +1,3 @@
-Game game;
-boolean game_is_running = false; // set true au début de jeu ;;; jl'uilise dans la classe Invaders 
-boolean tab_pressed = false; 
-int lastMoveTimeInvaders = 0;
-int moveIntervalInvaders = 1000; // moves chaque 1s 
-int shotIntervalInvaders = 5000;  // tirent chaque 5s 
-Menu menu;
-ArrayList<Bullet> bullets_spaceship = new ArrayList<Bullet>(); // liste pour gérer les tirs du spaceship  
-ArrayList<Bullet> bullets_invaders = new ArrayList<Bullet>();  //liste pour gérer les tirs des Invaders 
-int number_of_games_saved = 0 ; // variable used inthe menu when we save the game 
-int number_game_to_charge ; // variable used in the menu to charge a game 
-String chemin_game_to_charge; 
-import javax.swing.JOptionPane;
-boolean printScores = false; 
-
-// boolean pour finrir le jeu 
-boolean game_is_over = false;
-boolean you_win =false; 
-
-
 void setup() {
   size(600, 600, P2D);
   
@@ -98,9 +78,9 @@ void draw() {
       textFont(font_for_score);
       stroke(255);
       fill(255,0,0);
-      rect(150,150,300,300);
+      rect(300,300,300,300);
       fill(0);
-      text("YOU LOST " , 300, 300);
+      text(" YOU LOST " , 300, 300);
       noStroke();
     }
 

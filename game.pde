@@ -1,7 +1,3 @@
-// varible pour créer un game pour tester le code  
-PVector pos = new PVector(0,0);
-PVector pos_deplacement; 
-
 class Game 
 {
   Board _board;
@@ -135,8 +131,12 @@ class Game
       }
 
       // condition pour verifier si le tableau des invaders  est arrivé à la fin et il est pas vides ou le nombre de lifes est0  
-      if( (this._invader_tab.y_first_cell == 16 && this._invader_tab.tab_non_vide()) || (this._lifes <=0 && this._invader_tab.tab_non_vide())){
+      if(this._invader_tab.y_first_cell == 16 ){
         game_is_over = true; 
+      }
+
+      if(this._lifes <=0 && this._invader_tab.tab_non_vide()){
+        game_is_over = true;
       }
 
       // ondition pour vérifier si le tableauest vide 
@@ -174,7 +174,7 @@ class Game
          printScores = false;
       }
     }else{
-        game_is_running = true ; 
+       game_is_running = true ; 
     } 
 
     if( (k =='D' || k == 'd' || keyCode == RIGHT) && !tab_pressed){ // déplacement du spaceship 
@@ -193,10 +193,6 @@ class Game
        bullets_spaceship.add(new Bullet(bulletPos));
     }
     
-
-   
-
-
   }
 
 
@@ -211,19 +207,18 @@ class Game
     //boucle pour gérer les clicks sur le menu 
     if(button == LEFT && tab_pressed){
         for (int i = 0; i < 5; i++) {
-          // pour obtenir les dimensions des buttons 
+          // pour obtenir  les dimensions du debut des buttons 
           float buttonX = 200;
           float buttonY = 120 + i * (70);
 
         if (mouseX > buttonX && mouseX < buttonX + 200 &&
         mouseY > buttonY && mouseY < buttonY + 50) {
-            
-            //println("Bouton " +i+ " cliqué !\n");
-            handleButtonClickMenu(i);  
+            handleButtonClickMenu(i);  // appel àla fonciton 
+            //print("this is i  :::: "+  i);
          }
        }
       
-      // condition pour fermer le menu 
+      // condition pour fermer l'affichage du score
       if(printScores && ( mouseX <= 440 && mouseX >= 420) && (mouseY >= 165 && mouseY <= 185)){
         printScores = false;
       }  
@@ -236,7 +231,7 @@ class Game
   void printScore(){
     fill(255,0,0);
     textFont(font_for_score);
-     text(this._score, 45,20);
+    text(this._score, 45,20);
      
   }
 
@@ -291,17 +286,17 @@ void handleButtonClickMenu(int num_button) {
       this._board.saveBoard();
       break;
     case 2:
-      //
-      //number_game_to_charge = askInteger();
+      //number_game_to_charge = askInteger(); 
       //chemin_game_to_charge ="saved_games/game"+number_game_to_charge;
       //uploadOldGame(chemin_game_to_charge);
-      println("Charger une partie");
+      print("Charger une partie");
+      break;
     case 3:
-      println("Meilleurs scores");
+      //print("Meilleurs scores");
       printScores = true;
       break;
     case 4:
-      println("Quitter");
+      //print("Quitter");
       exit(); 
       break;
   }

@@ -31,7 +31,11 @@ final float pos_vertical_spaceship = 655;/* la position vertical final de  */
 final int  x_pos_invaders_dep = 2 ; 
 final int y_pos_invaders_dep = 3; 
 
-
+// dimensions pour les buttons de menu 
+int menu_size = 400;
+int width_button = 200 ;
+int height_button = 50; 
+int space_between = 20; 
 
 // font pour le projet 
 PFont font_for_score;
@@ -39,3 +43,27 @@ PFont font_for_menu;
 
 // tableau Strings pour chager text file des  meilleurs scores
 String[] best_scores; 
+
+// variables
+Game game;
+boolean game_is_running = false; // set true au début de jeu ;;; jl'uilise dans la classe Invaders 
+boolean tab_pressed = false; 
+int lastMoveTimeInvaders = 0;
+int moveIntervalInvaders = 1000; // moves chaque 1s 
+int shotIntervalInvaders = 5000;  // tirent chaque 5s 
+Menu menu;
+ArrayList<Bullet> bullets_spaceship = new ArrayList<Bullet>(); // liste pour gérer les tirs du spaceship  
+ArrayList<Bullet> bullets_invaders = new ArrayList<Bullet>();  //liste pour gérer les tirs des Invaders 
+int number_of_games_saved = 0 ; // variable used inthe menu when we save the game 
+int number_game_to_charge ; // variable used in the menu to charge a game 
+String chemin_game_to_charge; 
+import javax.swing.JOptionPane;
+boolean printScores = false; 
+
+// boolean pour finrir le jeu 
+boolean game_is_over = false;
+boolean you_win =false; 
+
+// varible pour créer un game pour tester le code  
+PVector pos = new PVector(0,0);
+PVector pos_deplacement; 

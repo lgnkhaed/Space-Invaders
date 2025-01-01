@@ -17,7 +17,7 @@ class Invaders{
        this.placer_invaders(board); 
     }
   
-    // constroctor taht helps in starting the game with atext file 
+    // constroctor taht helps in starting the game with a text file 
     Invaders(Board board , int _x_first_case , int _y_first_case ){
        this.x_first_cell = _x_first_case ; //ligne 
        this.y_first_cell = _y_first_case;  // colonnes 
@@ -68,8 +68,9 @@ class Invaders{
       }
 
     // on, arrette si on est en bas 
-      if (this.y_first_cell + this._invaders.length >= 19) {
-        game_is_running = false;
+     
+    if(this.x_first_cell >= 17){
+        game_is_over = true; 
       }
 }
 
